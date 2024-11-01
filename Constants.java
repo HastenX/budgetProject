@@ -6,7 +6,7 @@ public class Constants {
     // List<T> Data = new ArrayList<T>();
     final static String kFOOD = "Food";
     final static int kFOODVALUE = 1;
-    final static double kFOODCOST = 6250;
+    final static double kFOODCOST = 62500;
     //Constants for housing
     final static String kHOUSE = "Housing";
     final static int kHOUSEVALUE = 1;

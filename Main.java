@@ -1,57 +1,45 @@
 class Main extends Constants {
     public static void main(String[] agrs) {
         // Income
-        Planner Income = new Planner();
+        Souts Income = new Souts();
         Income.setNetIncome(kINCOME);
-
         // Food
-        Planner Food = new Planner();
+        Souts Food = new Souts();
         Food.setPriority(kFOOD, kFOODVALUE, kFOODCOST);
 
         // Housing
-        Planner House = new Planner();
+        Souts House = new Souts();
         House.setPriority(kHOUSE, kHOUSEVALUE, kHOUSECOST);
 
         // Utilities
-        Planner Utilities = new Planner();
+        Souts Utilities = new Souts();
         Utilities.setPriority(kUTILITIES, kUTILITIESVALUE, kUTILITIESCOST);
 
         // Programming gear
-        Planner Programming = new Planner();
+        Souts Programming = new Souts();
         Programming.setPriority(kPROGRAM, kPROGRAMVALUE, kPROGRAMCOST);
 
         // Running shoes
-        Planner Shoes = new Planner();
+        Souts Shoes = new Souts();
         Shoes.setPriority(kSHOES, kSHOESVALUE, kSHOESCOST);
 
-        // Outputs
-        System.out.println(
-                "Income:\nGross Income: " + kINCOME + "$\nNet Income (14.9% Tax): " + Income.getIncome() + "$");
+        // Outputs Income Info
+        Income.getTotalIncomeInfo(kINCOME, Income.getIncome());
 
-        // Budget Spendings
-        System.out.println("-\nBudget spendings: ");
-        System.out.println(Food.getPriority(Planner.percentSpending(kFOODCOST)));
-        System.out.println(House.getPriority(Planner.percentSpending(kHOUSECOST)));
-        System.out.println(Utilities.getPriority(Planner.percentSpending(kUTILITIESCOST)));
-        System.out.println(Programming.getPriority(Planner.percentSpending(kPROGRAMCOST)));
-        System.out.println(Shoes.getPriority(Planner.percentSpending(kSHOESCOST)));
+        // Budget Spendings compiled
+        Income.getCompiled(
+            Food.getPriority()
+            +House.getPriority()
+            +Utilities.getPriority()
+            +Programming.getPriority()
+            +Shoes.getPriority()
+        );
+
 
         // Amount leftover (Savings & Impulsive Spending)
-        if (Income.calcLeftover(true) >= 0 && Income.calcLeftover(true) != 0) {
-            System.out.println("Amount leftover for Savings: "
-                    + Income.Get_Savings()
-                    + "$\nAmount of Money leftover for Impuslive Spending: "
-                    + Income.Get_Impuslive() +
-                    "$\nTotal Money Left: "
-                    + Income.calcLeftover(true)
-                    + "$\nTotal Percent of money spent: "
-                    + ((Income.calcLeftover(false)) / Income.getIncome()) * 100 + "%"
-                    + "\nPercentages of values (1/2/3): " + Income.getValuePercent());
-        } else {
-            System.out.println("You are in debt from spending "
-                    + (Income.calcLeftover(true) * -1)
-                    + "$ over your income!" + "\nPercentage over budget: "
-                    + (((Income.calcLeftover(false)) / Income.getIncome()) - 1) * 100 + "%");
-        }
+        Income.getTotal(
+        (Income.getLeftover(true)), (Income.getLeftover(false)),
+        (Income.getIncome()), (Income.getSavings()), (Income.getImpulsive()), (Income.getValuePercent())
+        );
     }
 }
